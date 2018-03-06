@@ -3,6 +3,8 @@
 class Config(object):
     """
     """
+    DEBUG = False
+    TESTING = False
     DB_URI = 'postgresql://{db_user}:{db_pass}@{db_port}/{db_database}'.format(
         db_user='postgres',
         db_pass='sayursop123',
