@@ -12,6 +12,7 @@ def create_app(config_name):
     app.config.from_object(app_settings[config_name])
     app.config.from_pyfile(str(config_path))
 
+
     from app.user.view import user
 
     app.register_blueprint(user)
