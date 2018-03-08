@@ -3,7 +3,6 @@
 class Config(object):
     """
     """
-    DEBUG = False
     TESTING = False
     DB_URI = 'postgresql://{db_user}:{db_pass}@{db_port}/{db_database}'.format(
         db_user='postgres',
@@ -14,6 +13,7 @@ class Config(object):
 
 class ConfigDevelopment(Config):
     DEBUG = True
+    print('debug')
 
 class ConfigProduction(Config):
     DEBUG = False
@@ -22,3 +22,5 @@ app_settings = {
     'development': ConfigDevelopment,
     'production': ConfigProduction
 }
+
+

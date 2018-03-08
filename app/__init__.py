@@ -1,16 +1,23 @@
 import os
 from flask import Flask
 from flask import render_template
+from flask_wtf.csrf import CSRFProtect
 
 from config import app_settings
 
 config_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), '..', 'config.py')
 
 
-def create_app(config_name):
+def create_app(config_name  ):
     app = Flask(__name__, instance_relative_config=True)
     app.config.from_object(app_settings[config_name])
     app.config.from_pyfile(str(config_path))
+    
+    app.config['SECRET_KEY'] = 'Sm9obiBTY2hyb20ga2lja3MgYXNz'
+
+    csrf = CSRFProtect()
+    csrf.init_app(app)
+
 
 
     from app.user.view import user

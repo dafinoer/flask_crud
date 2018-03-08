@@ -7,7 +7,43 @@
 
 <!-- body -->
 {% block body %}
-    <h3 class="title_register"> this is register </h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 offset-md-3">
+                <form action="{{ url_for('user.register_user') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">  
+                        <div class="form-group">
+                            <label for="username_user">Username</label>
+                            {{ form.username(class='form-control', id='username_user', placeholder="Enter user")}}
+                            <!-- <input type="text" class="form-control" name="username" id="username_user" aria-describedby="emailHelp" placeholder="Enter user"> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="email_user">Emails</label>
+                            {{ form.email(class='form-control', placeholder='enter email')}}
+                            <!-- <input type="email" class="form-control" name="email" id="email_user" placeholder="input password"> -->
+                        </div>
+                        <div class="form-group">
+                            <label for="password_user"> Password</label>
+                            <input type="password" class="form-control " name="password" id="password_user">
+
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm_password"> Confirm</label>
+                            <input type="password" class="form-control" name="confirm" id="confirm_password">
+                            {% for message in form.password.errors %}
+                                <small class="invalid-feedback" >{{ message }}</small>
+                                <script>
+                                    $('#confirm_password').addClass('is-invalid')
+                                </script>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                </form> 
+                
+            </div>
+        </div>
+
+    </div>  
 {% endblock %}
 
 <!-- footer -->
