@@ -10,9 +10,21 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-6 offset-md-3">
-            <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
+            {% with messages = get_flashed_messages() %}{% endwith %}
+            <form action="{{ url_for('user.login_user') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{csrf_token()}}">
 
-            <div class=""></div>
+                <div class="form-group">
+                    <label for="username_user">Username</label>
+                    {{ form.username (class='form-control', id='username_user', placeholder="Enter user")}}
+                </div>
+                <div class="form-group">
+                    <label for="password_user">Password</label>
+                    {{ form.password (class='form-control', id='password_user', placeholder='password')}}
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                
+            </form>
         </div>
     </div>
 </div>

@@ -19,8 +19,13 @@
                         </div>
                         <div class="form-group">
                             <label for="email_user">Emails</label>
-                            {{ form.email(class='form-control', placeholder='enter email')}}
-                            <!-- <input type="email" class="form-control" name="email" id="email_user" placeholder="input password"> -->
+                            {{ form.email(class='form-control', placeholder='enter email' ,id='email_confirm')}}
+                            {% for message in form.email.errors %}
+                            <small class="invalid-feedback" >{{ message }}</small>
+                            <script>
+                                $('#email_confirm').addClass('is-invalid')
+                            </script>
+                        {% endfor %}
                         </div>
                         <div class="form-group">
                             <label for="password_user"> Password</label>

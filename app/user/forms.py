@@ -1,4 +1,5 @@
-from wtforms import Form, StringField, PasswordField, validators
+from wtforms import Form, StringField, PasswordField, validators, ValidationError
+from .models import User
 
 class RegisterForm(Form):
     username = StringField('Username', [validators.Length(max=40)])
@@ -8,6 +9,12 @@ class RegisterForm(Form):
         validators.EqualTo('confirm', message='Passwords must match')
         ])
     confirm = PasswordField('Repeat Password')
+
+
+    def validate_email(form, field):
+        get_email = User.query.filter_by(email=field.data).first()
+        if get_email is not None:
+            raise ValidationError('email sudah ada')
 
 
 class LoginForm(Form):
