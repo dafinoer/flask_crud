@@ -10,6 +10,7 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-12 col-md-6 offset-md-3">
+
             {% with messages = get_flashed_messages() %}{% endwith %}
             <form action="{{ url_for('user.login_user') }}" method="POST">
                 <input type="hidden" name="csrf_token" value="{{csrf_token()}}">

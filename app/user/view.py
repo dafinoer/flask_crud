@@ -2,7 +2,7 @@ from flask import Flask, Blueprint, render_template, request, flash, redirect, u
 from .forms import RegisterForm, LoginForm
 from .models import User
 from .. import db
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 user = Blueprint('user', __name__, url_prefix='/users')
 
@@ -33,7 +33,19 @@ def register_user():
 def login_user():
     forms = LoginForm(request.form)
     if request.method == 'POST' and forms.validate():
-        flash('thanks for login')
-        return 'hallo'
+        user = request.form.get('username')
+        password = request.form.get('password')
+
+        get_query = User.query.filter_by(email=user).first()
+
+        get_data = get_query.password_hash
+        
+        check_pass = check_password_hash(get_query.password_hash, password)
+
+        if get_query.username != user and check_pass != True:
+            flash('false')
+        else:
+            flash('thanks for login')
+            return 'hallo'
 
     return render_template('users/login.html', form=forms)

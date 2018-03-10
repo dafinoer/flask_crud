@@ -1,5 +1,6 @@
 from wtforms import Form, StringField, PasswordField, validators, ValidationError
 from .models import User
+from werkzeug.security import check_password_hash
 
 class RegisterForm(Form):
     username = StringField('Username', [validators.Length(max=40)])
